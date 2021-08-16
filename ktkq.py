@@ -19,3 +19,9 @@ def t(smithers_time_dict):
     ]
 
     return np.sum(pressure[:, None] * face_normals, axis=0)
+
+
+def t_time_progression(smithers_dict):
+    return [
+        t(smithers_dict[time]) for time in sorted(list(smithers_dict.keys()))
+    ]
