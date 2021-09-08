@@ -38,11 +38,7 @@ def t(vtk_path):
     n = na[:,:-1]
     a = na[:,-1]
 
-    print(pressure.shape)
-    print(n.shape)
-    print(a.shape)
-
-    return np.sum(pressure * n * a, axis=0)
+    return (pressure * a)[None,:] * n
 
 
 def t_time_progression(vtk_folder_path):
