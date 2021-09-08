@@ -38,6 +38,12 @@ def t(vtk_path):
     n = na[:,0]
     a = na[:,1]
 
+    print(pressure.shape)
+    print(pressure[:,None].shape)
+    print(n.shape)
+    print((pressure[:, None] * n).shape)
+    print(a.shape)
+    print((pressure[:, None] * n * a).shape)
     return np.sum(pressure[:, None] * n * a, axis=0)
 
 
