@@ -14,7 +14,7 @@ def normals_and_area(vtk_data):
 
         return (n / norm, abs(norm) / 2)
 
-    return np.apply_along_axis(nrm, 0, vtk_data['cells'])
+    return np.apply_along_axis(nrm, 1, vtk_data['cells'])
 
 
 def triangulate_vtk(vtk_path):
