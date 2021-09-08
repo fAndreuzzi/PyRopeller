@@ -10,7 +10,7 @@ def normals(vtk_data):
         v2 = vtk_data["points"][p3] - vtk_data["points"][p1]
         n = np.cross(v1, v2)
         return n / np.linalg.norm(n)
-    return np.array(map(lambda tp: nrm(*tp), vtk_data["cells"]))
+    return np.array(list(map(lambda tp: nrm(*tp), vtk_data["cells"])))
 
 
 def triangulate_vtk(vtk_path):
