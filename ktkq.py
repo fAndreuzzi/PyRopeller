@@ -8,9 +8,9 @@ def normals(vtk_data):
     def nrm(p1, p2, p3):
         v1 = vtk_data["points"][p2] - vtk_data["points"][p1]
         v2 = vtk_data["points"][p3] - vtk_data["points"][p1]
-        return np.cross(v1, v2)
-
-    return list(map(lambda tp: nrm(*tp), vtk_data["cells"]))
+        n = np.cross(v1, v2)
+        return n / np.linalg.norm(n)
+    return np.array(map(lambda tp: nrm(*tp), vtk_data["cells"]))
 
 
 def triangulate_vtk(vtk_path):
@@ -18,7 +18,6 @@ def triangulate_vtk(vtk_path):
     handler.SetFileName(vtk_path)
     handler.Update()
     polydata = handler.GetOutput()
-
     filter = vtkTriangleFilter()
     filter.SetInputData(polydata)
     filter.Update()
