@@ -5,16 +5,16 @@ import os
 
 
 def normals_and_area(vtk_data):
-    def nrm(p1, p2, p3):
-        v1 = vtk_data["points"][p2] - vtk_data["points"][p1]
-        v2 = vtk_data["points"][p3] - vtk_data["points"][p1]
+    def nrm(points):
+        v1 = vtk_data["points"][points[1]] - vtk_data["points"][points[0]]
+        v2 = vtk_data["points"][points[2]] - vtk_data["points"][points[0]]
 
         n = np.cross(v1, v2)
         norm = np.linalg.norm(n)
 
         return (n / norm, abs(norm) / 2)
 
-    return np.array(list(map(lambda tp: nrm(*tp), vtk_data["cells"])))
+    return np.apply_along_axis(nrm, 0, vtk_data['cells'])
 
 
 def triangulate_vtk(vtk_path):
