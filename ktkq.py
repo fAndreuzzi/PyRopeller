@@ -12,7 +12,7 @@ def normals_and_area(vtk_data):
         n = np.cross(v1, v2)
         norm = np.linalg.norm(n)
 
-        return (n / norm, abs(norm) / 2)
+        return np.array([n / norm, abs(norm) / 2])
 
     return np.apply_along_axis(nrm, 1, vtk_data['cells'])
 
