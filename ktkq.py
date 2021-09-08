@@ -35,8 +35,8 @@ def t(vtk_path):
 
     pressure = data["cell_data"]["p"]
     na = normals_and_area(data)
-    n = na[:,0]
-    a = na[:,1]
+    n = na[:,:-1]
+    a = na[:,-1]
 
     print(pressure.shape)
     print(n.shape)
