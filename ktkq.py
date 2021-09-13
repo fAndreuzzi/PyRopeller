@@ -1,8 +1,10 @@
 import numpy as np
 from smithers.io.vtkhandler import VTKHandler
-from vtk import vtkPolyDataReader, vtkPolyDataWriter, vtkTriangleFilter
+from vtk import vtkPolyDataReader, vtkTriangleFilter
 import os
 
+# set the preferred VTK reader
+VTKHandler._reader_ = vtkPolyDataReader
 
 def normals_and_area(vtk_data):
     def nrm(points):
@@ -29,9 +31,8 @@ def triangulate_vtk(vtk_path):
 
 
 def t(vtk_path):
-    handler = VTKHandler(vtkPolyDataReader, vtkPolyDataWriter)
     triangulated_vtk_data = triangulate_vtk(vtk_path)
-    data = handler.parse(triangulated_vtk_data)
+    data = VTKHandler.parse(triangulated_vtk_data)
 
     pressure = data["cell_data"]["p"]
     na = normals_and_area(data)
